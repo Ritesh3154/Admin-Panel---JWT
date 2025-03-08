@@ -34,19 +34,10 @@ require('./config/db').dbConnect()
 app.use(async (req, res, next) => {
 
     try {
-
-        const token = req?.cookies?.admin
-
-        if (!token) {
-            return res.redirect('/Login')
-        }
-
-        const verifyToken = jwt?.verify(token, "mykey")
-        const singleAdmin = await Admin.findById(verifyToken.id)
-
+       
         res.locals.req = req
         res.locals.res = res
-        res.locals.singleAdmin = singleAdmin
+      
         next()
     } catch (error) {
         console.log(error)
