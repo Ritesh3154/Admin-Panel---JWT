@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<%- include('../layout/HeadSection.ejs') -%>
+
+    <body>
+
+        <!-- Preloader - style you can find in spinners.css -->
+
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+
+        <!-- Main wrapper - style you can find in pages.scss -->
+
+        <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+            data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+            <%- include('../layout/Header.ejs')-%>
+                <%-include('../layout/SideBar.ejs')-%>
+                    <div class="page-wrapper">
+                        <div class="page-breadcrumb">
+                            <div class="row">
+                                <div class="col-12 d-flex no-block align-items-center">
+                                    <div class="ms-auto text-end">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                                <li class="breadcrumb-item active" aria-current="page">
+                                                    Add
+                                                </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="container">
+                                <div class="row">
+                                    <table class="table table-striped table-responsive">
+                                        <thead >
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Category Name</th>
+                                                <th scope="col">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% category.forEach((ele,index)=>{ %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%= index + 1 %>
+                                                    </th>
+                                                    <td>
+                                                        <%= ele.cat_name %>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/api/category/<%= ele._id %>" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                                        <a href="/updatecat?id=<%= ele._id %>" class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="footer text-center">
+                            All Rights Reserved by Matrix-admin. Designed and Developed by
+                            <a href="https://www.wrappixel.com">WrapPixel</a>.
+                        </footer>
+                    </div>
+        </div>
+        <%- include('../layout/JSlinks.ejs')-%>
+    </body>
+
+</html>

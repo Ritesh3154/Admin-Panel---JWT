@@ -1,0 +1,143 @@
+~<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<%- include('../layout/HeadSection.ejs') -%>
+
+    <body>
+
+        <!-- Preloader - style you can find in spinners.css -->
+
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+
+        <!-- Main wrapper - style you can find in pages.scss -->
+
+        <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+            data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+            <!-- Topbar header - style you can find in pages.scss -->
+
+            <%- include('../layout/Header.ejs')-%>
+
+                <!-- End Topbar header -->
+
+
+                <!-- Left Sidebar - style you can find in sidebar.scss  -->
+
+                <%- include('../layout/Sidebar.ejs')-%>
+
+                    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+
+
+                    <!-- Page wrapper  -->
+
+                    <div class="page-wrapper">
+
+                        <!-- Bread crumb and right sidebar toggle -->
+
+                        <div class="page-breadcrumb">
+                            <div class="row">
+                                <div class="col-12 d-flex no-block align-items-center">
+                                    <div class="ms-auto text-end">
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                                <li class="breadcrumb-item active" aria-current="page">
+                                                    Add
+                                                </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- End Bread crumb and right sidebar toggle -->
+
+
+                        <!-- Container fluid  -->
+
+                        <div class="container-fluid">
+
+                            <!-- Sales Cards  -->
+                            <div class="container">
+
+                                <div class="row">
+                                    <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/api/product">
+                                        <div class="card-body">
+                                            <h4 class="card-title"> Add Product</h4>
+                                    
+                                            <div class="form-group row">
+                                                <label for="category" class="col-sm-3 text-end control-label col-form-label">Category Name</label>
+                                                <div class="col-sm-9">
+                                                    <select name="category" id="category" class="form-select"
+                                                        onchange="window.location.href=`/addProduct?cat_id=${this.value}`">
+                                                        <option value="">--select category--</option>
+                                                        <% categories.forEach((cat) => { %>
+                                                            <option value="<%= cat._id %>" <%= cat._id.toString() === selectCategories ? "selected" : "" %>>
+                                                                <%= cat.cat_name %>
+                                                            </option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="form-group row">
+                                                <label for="subCategory" class="col-sm-3 text-end control-label col-form-label">Sub Category Name</label>
+                                                <div class="col-sm-9">
+                                                    <select name="subCategory" id="subCategory" class="form-select">
+                                                        <option value="">--select Sub category--</option>
+                                                        <% if (subcategories) { %>
+                                                            <% subcategories.forEach((sub) => { %>
+                                                                <option value="<%= sub._id %>"><%= sub.sub_cat %></option>
+                                                            <% }) %>
+                                                        <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="form-group row">
+                                                <label for="p_name" class="col-sm-3 text-end control-label col-form-label">Product Name</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="p_name" name="p_name" placeholder="Product Name Here" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="form-group row">
+                                                <label for="p_price" class="col-sm-3 text-end control-label col-form-label">Product Price</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="p_price" name="p_price" placeholder="Product Price Here" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="form-group row">
+                                                <label for="p_image" class="col-sm-3 text-end control-label col-form-label">Product Image</label>
+                                                <div class="col-sm-9">
+                                                    <input type="file" class="form-control" id="p_image" name="p_image" />
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="border-top">
+                                                <div class="card-body">
+                                                    <button class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="footer text-center">
+                            All Rights Reserved by Matrix-admin. Designed and Developed by
+                            <a href="https://www.wrappixel.com">WrapPixel</a>.
+                        </footer>
+                    </div>
+        </div>
+        <%- include('../layout/JSlinks.ejs')-%>
+    </body>
+
+</html>
