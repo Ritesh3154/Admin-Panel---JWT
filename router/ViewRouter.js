@@ -12,7 +12,7 @@ router.get('/', verifyToken, isCommon, (req, res) => {
     // res.render('pages/index')
     res.render('pages/index')
 })
-router.get('/AddCategory', (req, res) => {
+router.get('/AddCategory', verifyToken, (req, res) => {
     res.render('pages/AddCategory')
     // matchLogin(req, res, 'pages/AddCategory')
 })
@@ -49,12 +49,12 @@ router.get('/myprofile', verifyToken, async (req, res) => {
 
 router.get('/ChangePassword', async (req, res) => {
     const email = req.cookies.admin.email
-    res.render('pages/ChangePassword', { email , message: req.flash('info')})
+    res.render('pages/ChangePassword', { email, message: req.flash('info') })
 })
 router.get('/updatepwd', (req, res) => {
     res.render('pages/Change-ForgotPwd', { message: req.flash('info') })
 })
-router.get('/addsubcat', async (req, res) => {
+router.get('/addsubcat', verifyToken, async (req, res) => {
     const categories = await category.find()
     res.render('pages/AddSubCategory', { categories })
 })
@@ -82,7 +82,7 @@ router.get('/addProduct', async (req, res) => {
 
     res.render('pages/AddProduct', { categories, subcategories, selectCategories })
 })
-router.get('/viewProduct', async (req, res) => {
+router.get('/viewProduct', verifyToken, async (req, res) => {
     const categories = await category.find();
     const subCategories = await SubCat.find()
     const product = await Product.find().populate("category").populate("subCategory");

@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken')
 app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.use('/public', express.static("uploads/product"))
-app.use('/public', express.static("uploads/admin"))
+app.use('/admin', express.static("uploads/admin"))
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
