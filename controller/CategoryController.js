@@ -45,10 +45,8 @@ exports.update = async (req, res) => {
             cat_name: req.body.cat_name
          }
       )
-      res.json({
-         success: true,
-         message: "category updated"
-      })
+      res.redirect('/ViewCategory')
+
    } catch (error) {
       console.log(error);
    }

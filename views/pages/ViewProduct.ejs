@@ -52,16 +52,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% product.forEach((ele, index) => { %>
+                                            <% product.forEach((ele, index)=> { %>
                                                 <tr>
                                                     <th scope="row">
                                                         <%= index + 1 %>
                                                     </th>
                                                     <td>
-                                                        <%=  ele.category.cat_name  %>
+                                                        <%= ele?.category?.cat_name %>
                                                     </td>
                                                     <td>
-                                                        <%=  ele.subCategory.sub_cat  %>
+                                                        <%= ele?.subCategory?.sub_cat %>
                                                     </td>
                                                     <td>
                                                         <%= ele.p_name %>
@@ -74,13 +74,17 @@
                                                             style="max-width: 100px; height: auto;">
                                                     </td>
                                                     <td>
-                                                        <a href="/api/product/<%= ele._id %>" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
-                                                        <a href="/updateProduct?id=<%= ele._id %>" class="btn btn-outline-warning"><i class="fa-solid fa-pencil"></i></a>
+                                                        <a href="/api/product/<%= ele._id %>"
+                                                            class="btn btn-outline-danger"><i
+                                                                class="fa-solid fa-trash"></i></a>
+                                                        <a href="/updateProduct?id=<%= ele._id %>"
+                                                            class="btn btn-outline-warning"><i
+                                                                class="fa-solid fa-pencil"></i></a>
                                                     </td>
                                                 </tr>
-                                            <% }) %>
+                                                <% }) %>
                                         </tbody>
-                                        
+
                                     </table>
                                 </div>
                             </div>

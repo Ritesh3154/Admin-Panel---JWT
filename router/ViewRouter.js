@@ -16,12 +16,12 @@ router.get('/AddCategory', verifyToken, isCommon, (req, res) => {
     res.render('pages/AddCategory')
     // matchLogin(req, res, 'pages/AddCategory')
 })
-router.get('/ViewCategory', async (req, res) => {
+router.get('/ViewCategory',verifyToken, isCommon, async (req, res) => {
     const category = await CategoryModel.find()
     // console.log(category);
     res.render('pages/ViewCategory', { category })
 })
-router.get('/updatecat', async (req, res) => {
+router.get('/updatecat',verifyToken, isCommon, async (req, res) => {
     const { id } = req.query
     const category = await CategoryModel.findById(id)
     // console.log(category);
@@ -58,11 +58,11 @@ router.get('/addsubcat', verifyToken, isCommon, async (req, res) => {
     const categories = await category.find()
     res.render('pages/AddSubCategory', { categories })
 })
-router.get('/viewsubcat', async (req, res) => {
+router.get('/viewsubcat',verifyToken, isCommon, async (req, res) => {
     const subcategories = await SubCat.find().populate('category')
     res.render('pages/ViewSubCategory', { subcategories })
 })
-router.get('/UpdateSubCategory', async (req, res) => {
+router.get('/UpdateSubCategory', verifyToken, isCommon,async (req, res) => {
     const { id } = req.query
     const categories = await category.find()
     const subcategories = await SubCat.findById(id).populate('category')
@@ -82,14 +82,14 @@ router.get('/addProduct', verifyToken, isCommon, async (req, res) => {
 
     res.render('pages/AddProduct', { categories, subcategories, selectCategories })
 })
-router.get('/viewProduct', async (req, res) => {
+router.get('/viewProduct',verifyToken, isCommon, async (req, res) => {
     const categories = await category.find();
     const subCategories = await SubCat.find()
     const product = await Product.find().populate("category").populate("subCategory");
     res.render('pages/ViewProduct', { product, categories, subCategories })
 })
 
-router.get('/updateProduct', async (req, res) => {
+router.get('/updateProduct', verifyToken, isCommon,async (req, res) => {
     const { id, cat_id } = req.query
     const categories = await category.find();
     const product = await Product.findById(id).populate("category").populate("subCategory");
