@@ -12,7 +12,7 @@ router.get('/', verifyToken, isCommon, (req, res) => {
     // res.render('pages/index')
     res.render('pages/index')
 })
-router.get('/AddCategory', verifyToken, (req, res) => {
+router.get('/AddCategory', verifyToken, isCommon, (req, res) => {
     res.render('pages/AddCategory')
     // matchLogin(req, res, 'pages/AddCategory')
 })
@@ -39,7 +39,7 @@ router.get('/logout', (req, res) => {
     res.clearCookie('admin')
     res.redirect('/login')
 })
-router.get('/myprofile', verifyToken, async (req, res) => {
+router.get('/myprofile', verifyToken, isCommon, async (req, res) => {
     const { id } = req.user
     const admin = await Admin.findById(id)
     console.log(admin)
@@ -54,7 +54,7 @@ router.get('/ChangePassword', async (req, res) => {
 router.get('/updatepwd', (req, res) => {
     res.render('pages/Change-ForgotPwd', { message: req.flash('info') })
 })
-router.get('/addsubcat', verifyToken, async (req, res) => {
+router.get('/addsubcat', verifyToken, isCommon, async (req, res) => {
     const categories = await category.find()
     res.render('pages/AddSubCategory', { categories })
 })
@@ -69,7 +69,7 @@ router.get('/UpdateSubCategory', async (req, res) => {
     res.render('pages/UpdateSubCategory', { categories, subcategories })
 })
 
-router.get('/addProduct', async (req, res) => {
+router.get('/addProduct', verifyToken, isCommon, async (req, res) => {
     const categories = await category.find()
 
     const { cat_id } = req.query
@@ -82,7 +82,7 @@ router.get('/addProduct', async (req, res) => {
 
     res.render('pages/AddProduct', { categories, subcategories, selectCategories })
 })
-router.get('/viewProduct', verifyToken, async (req, res) => {
+router.get('/viewProduct', async (req, res) => {
     const categories = await category.find();
     const subCategories = await SubCat.find()
     const product = await Product.find().populate("category").populate("subCategory");
